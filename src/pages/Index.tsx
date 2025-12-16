@@ -1,6 +1,28 @@
 import { Check } from "lucide-react";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 const Index = () => {
+  const [downloadCount, setDownloadCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    const fetchCount = async () => {
+      const { data, error } = await supabase
+        .from("download_counter")
+        .select("count")
+        .limit(1)
+        .maybeSingle();
+
+      if (!error && data) {
+        setDownloadCount(data.count);
+      }
+    };
+
+    fetchCount();
+  }, []);
+
+  const formattedCount = downloadCount?.toLocaleString() ?? "...";
+
   return (
     <main className="min-h-screen bg-background flex items-center justify-center px-6">
       <div className="max-w-xl w-full text-center">
@@ -30,7 +52,7 @@ const Index = () => {
 
         {/* Description */}
         <p className="opacity-0 animate-fade-up delay-400 font-body text-base md:text-lg text-muted-foreground leading-relaxed max-w-md mx-auto">
-          You are number <span className="font-medium text-foreground">1,247</span> to download the app.
+          You are number <span className="font-medium text-foreground">{formattedCount}</span> to download the app.
         </p>
       </div>
     </main>
