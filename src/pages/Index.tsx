@@ -30,15 +30,8 @@ const Index = () => {
 
         {/* Description */}
         <p className="opacity-0 animate-fade-up delay-400 font-body text-base md:text-lg text-muted-foreground leading-relaxed max-w-md mx-auto">
-          Your order has been confirmed and will be shipped shortly. 
-          A confirmation email with tracking details is on its way.
+          You are number <span className="font-medium text-foreground">1,247</span> to download the app.
         </p>
-
-        {/* Order reference */}
-        <div className="opacity-0 animate-fade-up delay-500 mt-10 inline-flex items-center gap-3 px-5 py-3 rounded-full bg-card border border-border">
-          <span className="font-body text-sm text-muted-foreground">Order reference</span>
-          <span className="font-body text-sm font-medium text-foreground tracking-wide">#ORD-2024-7842</span>
-        </div>
       </div>
     </main>
   );
