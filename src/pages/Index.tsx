@@ -7,24 +7,17 @@ const Index = () => {
 
   useEffect(() => {
     const initCount = async () => {
-      const hasOpened = localStorage.getItem("app_opened");
+      const storedNumber = localStorage.getItem("user_number");
       
-      if (!hasOpened) {
-        // First time opening - increment and store flag
+      if (storedNumber) {
+        // Already has a number - use it
+        setDownloadCount(parseInt(storedNumber, 10));
+      } else {
+        // First time - get their number and store it permanently
         const { data, error } = await supabase.rpc("increment_download_count");
         if (!error && data !== null) {
           setDownloadCount(data);
-          localStorage.setItem("app_opened", "true");
-        }
-      } else {
-        // Already opened before - just fetch current count
-        const { data, error } = await supabase
-          .from("download_counter")
-          .select("count")
-          .limit(1)
-          .maybeSingle();
-        if (!error && data) {
-          setDownloadCount(data.count);
+          localStorage.setItem("user_number", data.toString());
         }
       }
     };
