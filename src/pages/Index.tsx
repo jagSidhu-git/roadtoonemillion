@@ -6,15 +6,30 @@ const Index = () => {
   const [downloadCount, setDownloadCount] = useState<number | null>(null);
 
   useEffect(() => {
-    const incrementCount = async () => {
-      const { data, error } = await supabase.rpc("increment_download_count");
-
-      if (!error && data !== null) {
-        setDownloadCount(data);
+    const initCount = async () => {
+      const hasOpened = localStorage.getItem("app_opened");
+      
+      if (!hasOpened) {
+        // First time opening - increment and store flag
+        const { data, error } = await supabase.rpc("increment_download_count");
+        if (!error && data !== null) {
+          setDownloadCount(data);
+          localStorage.setItem("app_opened", "true");
+        }
+      } else {
+        // Already opened before - just fetch current count
+        const { data, error } = await supabase
+          .from("download_counter")
+          .select("count")
+          .limit(1)
+          .maybeSingle();
+        if (!error && data) {
+          setDownloadCount(data.count);
+        }
       }
     };
 
-    incrementCount();
+    initCount();
   }, []);
 
   const formattedCount = downloadCount?.toLocaleString() ?? "...";
