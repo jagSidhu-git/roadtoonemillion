@@ -1,6 +1,7 @@
 import { Check } from "lucide-react";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import FallingCash from "@/components/FallingCash";
 
 const Index = () => {
   const [downloadCount, setDownloadCount] = useState<number | null>(null);
@@ -28,7 +29,9 @@ const Index = () => {
   const formattedCount = downloadCount?.toLocaleString() ?? "...";
 
   return (
-    <main className="min-h-screen bg-background flex items-center justify-center px-6">
+    <>
+      <FallingCash />
+      <main className="min-h-screen bg-background flex items-center justify-center px-6">
       <div className="max-w-xl w-full text-center">
         {/* Checkmark Icon */}
         <div className="opacity-0 animate-scale-in mb-8">
@@ -60,6 +63,7 @@ const Index = () => {
         </p>
       </div>
     </main>
+    </>
   );
 };
 
