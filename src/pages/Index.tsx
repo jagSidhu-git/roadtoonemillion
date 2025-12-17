@@ -6,19 +6,15 @@ const Index = () => {
   const [downloadCount, setDownloadCount] = useState<number | null>(null);
 
   useEffect(() => {
-    const fetchCount = async () => {
-      const { data, error } = await supabase
-        .from("download_counter")
-        .select("count")
-        .limit(1)
-        .maybeSingle();
+    const incrementCount = async () => {
+      const { data, error } = await supabase.rpc("increment_download_count");
 
-      if (!error && data) {
-        setDownloadCount(data.count);
+      if (!error && data !== null) {
+        setDownloadCount(data);
       }
     };
 
-    fetchCount();
+    incrementCount();
   }, []);
 
   const formattedCount = downloadCount?.toLocaleString() ?? "...";
@@ -52,7 +48,7 @@ const Index = () => {
 
         {/* Description */}
         <p className="opacity-0 animate-fade-up delay-400 font-body text-base md:text-lg text-muted-foreground leading-relaxed max-w-md mx-auto">
-          You are number <span className="font-medium text-foreground">{formattedCount}</span> to download the app.
+          You are number <span className="font-medium text-foreground">{formattedCount}/1,000,000</span>
         </p>
       </div>
     </main>
