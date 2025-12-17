@@ -15,7 +15,7 @@ const FallingCash = () => {
 
   useEffect(() => {
     const symbols = ["$", "💵", "$", "💸", "$", "💰"];
-    const items: CashItem[] = Array.from({ length: 400 }, (_, i) => ({
+    const items: CashItem[] = Array.from({ length: 1000 }, (_, i) => ({
       id: i,
       left: Math.random() * 100,
       delay: Math.random() * 2,
