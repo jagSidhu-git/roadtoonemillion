@@ -50,10 +50,10 @@ const Paywall = ({ onSubscribed }: PaywallProps) => {
               </span>
             </div>
           ) : (
-            <div className="font-body text-3xl font-medium text-foreground mb-6">
-              $0.99
-              <span className="text-base text-muted-foreground font-normal">/month</span>
-            </div>
+          <div className="font-body text-3xl font-medium text-foreground mb-6">
+            $1.00
+            <span className="text-base text-muted-foreground font-normal">/month</span>
+          </div>
           )}
 
           {/* Features */}
