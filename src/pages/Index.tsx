@@ -44,7 +44,7 @@ const Index = () => {
 
         {/* Subheading */}
         <p className="opacity-0 animate-fade-up delay-200 mt-6 font-display text-2xl md:text-3xl text-muted-foreground italic">
-          for your purchase
+          your subscription
         </p>
 
         {/* Divider */}
