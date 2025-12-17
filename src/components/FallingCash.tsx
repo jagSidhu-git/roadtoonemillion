@@ -18,8 +18,8 @@ const FallingCash = () => {
     const items: CashItem[] = Array.from({ length: 1000 }, (_, i) => ({
       id: i,
       left: Math.random() * 100,
-      delay: Math.random() * 2,
-      duration: 3 + Math.random() * 3,
+      delay: Math.random() * 8,
+      duration: 2 + Math.random() * 4,
       size: 16 + Math.random() * 24,
       rotation: Math.random() * 360,
       symbol: symbols[Math.floor(Math.random() * symbols.length)],
